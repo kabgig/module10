@@ -1,26 +1,21 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        FileInputStream streaming = new FileInputStream("Root/files/asciitable.txt");
-        int count = 0;
-        int num = 0;
-        while (num != -1) {
-            try {
-                num = streaming.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            if ('0' <= num && num <= '9') count++;
+    public static void main(String[] args) throws IOException {
+
+        copyFileUsingStream("/Users/ansarismagilov/Desktop/1.png", "/Users/ansarismagilov/Desktop/2.png");
+    }
+
+    private static void copyFileUsingStream(String source, String dest) throws IOException {
+
+        InputStream fis = new FileInputStream(source);
+        OutputStream fos = new FileOutputStream(dest);
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read(buffer)) > 0) {
+            fos.write(buffer, 0, length);
         }
-        System.out.println(count);
-        try {
-            streaming.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        fis.close();
+        fos.close();
     }
 }
-
