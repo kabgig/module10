@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         copyFileUsingStream(
-                "2.txt",
+                "3.txt",
                 Charset.forName("UTF-8"),
                 "3.txt",
                 Charset.forName("WINDOWS-1251"));
